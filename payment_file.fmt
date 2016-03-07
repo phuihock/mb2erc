@@ -1,0 +1,123 @@
+1|2|N|M|Record Type|Default value for message header: '00'|00|1
+2|30|AN|M|Corporate ID|Corporate ID will be given by bank in which user use it to login.||1
+3|30|AN|M|Client Batch ID|Client batch reference number identified by you. It has to be unique for your own reference.||1
+4-28|100|AN|O|Filler 1 - 25|Default to blank Please refer to General Information bullet 2 for clarification||1
+29|500|AN|O|File Return Status|Default to blank. Return status "Completed" will be populated by Bank.||1
+
+1|2|N|M|Record Type|Default value for detail record: '01'|01|1
+2|2|AN|M|Payment Mode|Refer to Table 1 in Appendix||1
+3|50|AN|M|Provider Product Group Name|Refer to Table 2 in Appendix||1
+4|2|AN|C|Destination Country|Mandatory for Cross Border Payment Mode: IO, IP, TT, DD, RP. Refer to Table 5 in Appendix.||1
+5|8|AN|M|Value Date|DDMMYYYY Current or Maximum of 90 days future date||1
+6|8|AN|C|Cheque Date|DDMMYYYY Current or Maximum of 14 days future date Mandatory for Payment Mode: CC, MC||1
+7|50|AN|O|By Order Of|To be specified by client. If field is left blank, value will be defaulted to client’s name as registered in the system.||1
+8|30|AN|M|Customer Reference Number|To be specified by client for own reference The value must be unique for each record in one file The value in this field will be used to match against Payment Advice File (Record field no 3)||1
+9|55|AN|O|Debit Reference|To be specified by client own reference. The value will be reflected in Bank Statement – Reference field (limited to 14 characters) If left blank, it will default to RCMS reference number without provider code e.g. MYIT150211043320||1
+10|55|AN|O|Debit Description|To be specified by client for own reference If left blank, it will default to bank product name and beneficiary name (1D1C) or Client Batch ID (1DMC). The value will be reflected in Bank Statement – Description field (limited to 39 characters)||1
+11|3|AN|M|Transaction Currency|Field value should be as per International Currency Code format e.g GBP, USD etc. For local payment, please default it to local currency.||1
+12|9(13)v9(2)|N|M|Transaction Amount|For Delimited format, e.g 18888.30||1
+13|1|A|C|In Debit Account Currency|Mandatory for Payment Mode: IA, IT, IO, IP, IE, IG, IM, TT, DD. Y - Amount in Debit Account Currency N - Amount in Transaction Currency||1
+14|3|AN|M|Debiting Currency|Field value should be as per International Currency Code format e.g GBP, USD etc. For local payment, please default it to local currency.||1
+15|20|N|M|Debiting Account Number|Client’s debit account number.||1
+16|35|AN|C|Credit Account Number|Beneficiary’s Account Number. Mandatory for Payment Mode IA, IT, IO, IP, TT, IE, IG, IM For payment mode TT: Those countries account number with IBAN format, please provide IBAN number.||1
+17|15|AN|O|Favorite Beneficiary/Biller Code|Applicable for payment mode: IT, IP, IE, IG, IM, TT, DD, MC, CC, TP, RP||1
+18|10|AN|C|Biller Organization|Mandatory for payment mode: TP||1
+19|1|A|M|Resident Indicator (Beneficiary)|Mandatory for Provider = MY 'Y' - Resident 'N' - Non-Resident||1
+20|40|AN|M|Beneficiary Name 1|Mandatory for Payment Mode IT, IP, IE, IG, IM, TT, DD, CC, MC If length is more than 40 characters, to be continued in Field 21 & 22||1
+21|40|AN|O|Beneficiary Name 2|Leave it blank||1
+22|40|AN|O|Beneficiary Name 3|Leave it blank||1
+23|14|N|C|Beneficiary Contact Number|Mandatory for Payment Mode: TT||1
+24|20|AN|O|Beneficiary ID|Applicable to MC,CC Only||1
+25|20|AN|O|New ID No|Applicable for payment mode: IT, IP, IE, IG, IM, TT. Mandatory for ID Validation||1
+26|20|AN|O|Old ID No|Applicable for payment mode: IT, IP, IE, IG, IM, TT. Mandatory for ID Validation||1
+27|20|AN|O|Business Registration No|Applicable for payment mode: IT, IP, IE, IG, IM, TT. Mandatory for ID Validation||1
+28|20|AN|O|Police/Army ID/Passport No|Applicable for payment mode: IT, IP, IE, IG, IM, TT. Mandatory for ID Validation||1
+29|30|AN|O|Bene Address 1|Can be blank if Beneficiary Code provided.||1
+30|30|AN|O|Bene Address 2|Can be blank if Beneficiary Code provided.||1
+31|30|AN|O|Bene Address 3|Can be blank if Beneficiary Code provided.||1
+32|10|AN|C|Bene Country|Mandatory for payment mode: CC, MC, DD, TT. Can be blank if Beneficiary Code is provided. Country code as per Country Maintenance (5, in Appendix)||1
+33|10|AN|C|Bene State/Province|Mandatory for payment mode: CC, MC, DD, TT. For payment mode MC/CC: Bene State Code as per Table 6 in Appendix. For payment mode TT: Please default it to code 99 except the payment destination country is Singapore then default it to blank. Can be blank if Beneficiary Code in field 17 is populated. State/Province Code as per State/Province Maintenance||1
+34|10|AN|C|Bene Prefecture|Mandatory for payment mode: DD, TT. For payment mode TT: Please default it to blank except for countries i.e. Australia (AU), Canada(CA), China(CN) & India(IN) please default it to code 99. Can be blank if Beneficiary Code in field 17 is populated. Only applicable for country with prefecture. Prefecture Code as per Prefecture Code Maintenance.||1
+35|10|AN|C|Bene City|Mandatory for payment mode: CC, MC, DD, TT. For payment mode MC/CC: Bene State Code as per Table 6 in Appendix. Please leave it blank if code 99 provided at field 35. For payment mode TT: Please default it to code 99 except the payment destination country is Singapore and HongKong default it to blank. Can be blank if Beneficiary Code in field 17 is populated. City Code as per City Maintenance||1
+36|10|AN|C|Bene ZIP/Postal Code|Mandatory for payment mode: CC, MC, DD, TT. Can be blank if Beneficiary Code in field 17 is populated.||1
+37|11|AN|C|Bene Bank Code|Bank Code values as per SWIFT BIC or Interbank Code Maintenance. For payment mode TT: Please default it to blank if the payment destination country is Canada and India. For Payment mode IA, IT: Leave it blank||1
+38|5|N|O|Bene Bank Branch|Default to blank.||1
+39|20|AN|C|Bene Bank Name|Applicable only for payment mode: TT Note: Mandatory if the payment destination country is Canada and India.||1
+40|35|AN|C|Bene Bank Address 1|Applicable only for payment mode: TT Note: Mandatory if the payment destination country is Canada and India.||1
+41|35|AN|C|Bene Bank Address 2|Applicable only for payment mode: TT||1
+42|35|AN|C|Bene Bank Address 3|Applicable only for payment mode: TT||1
+43|34|AN|C|Other Codes|Mandatory for payment mode: TT. Mandatory for destination country Australia (AU), Canada(CA), China(CN), India(IN), Europe countries & United States only.||1
+44|33|AN|C|Other Codes Value|Mandatory for payment mode: TT. Mandatory for destination country Australia (AU), Canada(CA), China(CN), India(IN), Europe countries & United States only.||1
+45|35|AN|O|Intermediary Bank Account No.|Applicable only for payment mode: TT||1
+46|11|AN|O|Intermediary Bank Code|Applicable only for payment mode: TT Bank Code values as per SWIFT BIC Maintenance.||1
+47|20|AN|O|Intermediary Bank Name|Applicable only for payment mode: TT||1
+48|35|AN|O|Intermediary Bank Address 1|Applicable only for payment mode: TT||1
+49|35|AN|O|Intermediary Bank Address 2|Applicable only for payment mode: TT||1
+50|35|AN|O|Intermediary Bank Address 3|Applicable only for payment mode: TT||1
+51|10|AN|O|Intermediary Bank Other Codes|Applicable only for TT. Other Code as per Table 4 in Appendix.||1
+52|33|AN|O|Intermediary Bank Other Codes Value|Applicable only for payment mode: TT||1
+53|2|N|C|Delivery Method/Collection Method|Applicable and mandatory only for payment mode: MC, CC. Please refer Table 3 in Appendix for details of Delivery Mode||1
+54|5|N|O|Branch|Leave it blank||1
+55|80|AN|C|Collector Name/Company Name|Leave it blank Please refer to General Information bullet 2 for clarification||1
+56|20|AN|C|Collector ID|Leave it blank Please refer to General Information bullet 2 for clarification||1
+57|80|AN|C|Attention|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'. (refer to Table 3 in Appendix)||1
+58|40|AN|C|Delivery Address 1|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'. (refer to Table 3 in Appendix)||1
+59|40|AN|C|Delivery Address 2|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'. (refer to Table 3 in Appendix)||1
+60|40|AN|C|Delivery Address 3|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'. (refer to Table 3 in Appendix)||1
+61|10|AN|C|Delivery Country|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03.Country code as per Country Maintenance||1
+62|10|AN|C|Delivery State/Province|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03.Bene State/Province Code as per Table 6 in Appendix.||1
+63|10|AN|O|Delivery Prefecture|Applicable only for payment mode: MC, CC.||1
+64|10|AN|C|Delivery City|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'. Bene State Code as per Table 6 in Appendix. Please leave it blank if code "99"-Others provided at field 64.||1
+65|10|AN|C|Delivery Zip/Postal Code|Applicable only for payment mode: MC, CC. Mandatory for all delivery mode code except '03'.||1
+66|1|AN|C|FX Mode|Applicable for TT, DD 'B' - Board Rate 'C' - Contract Rate||1
+67|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+68|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+69|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+70|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+71|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+72|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+73|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+74|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+75|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+76|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+77|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+78|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+79|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+80|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+81|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+82|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+83|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+84|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+85|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+86|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+87|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+88|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+89|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+90|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+91|10|N|C|Contract Number|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+92|9(15)v9(7)|N|C|Rate|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+93|35|AN|C|Dealer Name|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+94|9(15)v9(2)|N|C|Amount to Utilize|If field 66/FX Mode is "C" then it’s a mandatory field.||1
+95-101|30|AN|C|Reference 1-7|Applicable for TP 102 55 AN O Credit Reference/Client Reference To be specified by client for beneficiary’s reference The value will be reflected in MBB Bank Statement – Reference field (limited to 14 characters)||1
+102|55|AN|O|Credit Reference/Client Reference|To be specified by client for beneficiary’s reference The value will be reflected in MBB Bank Statement – Reference field (limited to 14 characters) If left blank, it will default to RCMS reference number without provider code e.g. MYIT150211043320||1
+103|55|AN|O|Credit Description/Payment Reference|To be specified by client for beneficiary’s reference. The value will be reflected at beneficiary bank statement. It will default to client Credit Description (1-20) follow by Account Name(21-40) If left blank, it will default to Bank Product Name (1 – 20) follow by Account Name (21 – 40)||1
+104|35|AN|O|Payment Details 1|Leave it blank||1
+105|35|AN|O|Payment Details 2|Leave it blank||1
+106|35|AN|O|Payment Details 3|Leave it blank||1
+107|35|AN|O|Payment Details 4|Leave it blank||1
+108|35|AN|O|Payment Details 5|Leave it blank||1
+109|35|AN|O|Instruction to Bank|Leave it blank||1
+110|2|AN|M|Charges Borne By|For Payment mode IA ‘00’ – Waived For Payment mode TT '01' - Applicant '02' – Beneficiary – currently not supported '03' - Shared For Payment mode IE, IG, IM, DD, CC, MC '01' - Applicant '02' - Beneficiary '03' – Shared – currently not supported||1
+111|5|AN|C|Purpose of Transfer|Mandatory and applicable to provider MY only, if the beneficiary (field 19) and/or the applicant is non-resident.||1
+112-144|100|AN|O|Filler 1-33|Leave it blank Please refer to General Information bullet 2 for clarification||1
+145|100|AN|O|Beneficiary State/Province Text Box|For payment mode CC, MC: Mandatory if field 33 is filled with "99" – Others. For payment mode TT: Please default it to blank if the payment destination country is Singapore.||1
+146|100|AN|O|Beneficiary Prefecture Text Box|For payment mode CC, MC: Mandatory if field 34 is filled with "99 – Others". For payment mode TT: Please default it to blank except for countries i.e. Australia (AU), Canada(CA), China(CN) & India(IN).||1
+147|100|AN|O|Beneficiary City/District Text Box|For payment mode CC, MC: Mandatory if field 35 is filled with "99 – Others". For payment mode TT: Please default it to blank if the payment destination country is Singapore and HongKong.||1
+148-336|100|AN|O|Filler 37 - 225|Leave it blank Please refer to General Information bullet 2 for clarification 337 500 AN O Transaction Return Status Default to blank. Return status populated by Bank. IT, IP, IE, IG, IM, TT, DD, TP, RP Status[Successful] Processing date[DDMMYYYY] Status [Bank Rejected] Reason[xxxxxx ] Rejected code[xxxxxxxx] Processing date[DDMMYYYY] MC, CC Status[Successful] Cheque number[xxxxxx] Processing date[DDMMYYYY] Status[Bank Rejected] Reason[xxxxxxx] Rejected code[xxxxxxxx] Processing date[DDMMYYYY] **X denote value||1
+337|500|AN|O|Transaction Return Status|Default to blank. Return status populated by Bank. IT, IP, IE, IG, IM, TT, DD, TP, RP Status[Successful] Processing date[DDMMYYYY] Status [Bank Rejected] Reason[xxxxxx ] Rejected code[xxxxxxxx] Processing date[DDMMYYYY] MC, CC Status[Successful] Cheque number[xxxxxx] Processing date[DDMMYYYY] Status[Bank Rejected] Reason[xxxxxxx] Rejected code[xxxxxxxx] Processing date[DDMMYYYY] **X denote value||1
+
+1|2|N|M|Record Type|Default value to '99' (Message Footer)|99|1
+2|6|N|M|Total Count|Total number of transaction/record in the batch||1
+3|9(13)v9(2)|N|M|Total Debiting Amount|For Delimited format, e.g 18888.30 For Fixed length format, e.g 000000001888830||1
+4|15|N|C|Hashing Value|It is use as an added security to avoid the file being tampered by unauthorized person before being uploaded into M2e. Please refer to the bank to get the calculation formula.||1
+5-29|100|AN|O|Filler 1 - 25|Leave it blank Please refer to General Information bullet 2 for clarification||1
